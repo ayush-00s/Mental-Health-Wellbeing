@@ -22,6 +22,7 @@ const blogsSchema = mongoose.Schema({
     image: String
 });
 
+
 const UserModel = mongoose.model("User", userSchema);
 const BlogModel = mongoose.model("Blogs", blogsSchema);
 

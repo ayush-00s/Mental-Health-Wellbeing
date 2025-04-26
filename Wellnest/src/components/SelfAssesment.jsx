@@ -9,17 +9,7 @@ const SelfAssesment = () => {
     navigate('/Test');
   };
 
-  useEffect(() => {
-    const storedResult = localStorage.getItem("llmResult");
-    if (storedResult) {
-      try {
-        const parsed = JSON.parse(storedResult);
-        setAssessment(parsed);
-      } catch (e) {
-        console.error("Error parsing result:", e);
-      }
-    }
-  }, []); 
+ 
 
   return (
     <div>

@@ -21,59 +21,7 @@ export default function MentalHealthform({ onSubmit }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate that all questions have been answered
-    const unansweredQuestions = questions.filter(q => responses[q.id] === undefined);
-    if (unansweredQuestions.length > 0) {
-      alert("Please answer all questions before submitting.");
-      // Set current question to the first unanswered question
-      const firstUnansweredIndex = questions.findIndex(q => responses[q.id] === undefined);
-      setCurrentQuestion(firstUnansweredIndex);
-      return;
-    }
-
-    try {
-      const questionnaireType = "PHQ-9"; // or "GAD-7", "PSS-10" — you can also detect based on questions length
-  
-      const res = await fetch("http://localhost:5000/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          responses: Object.fromEntries(
-            Object.entries(responses).map(([key, value]) => [key, parseInt(value)])
-          ),
-          questionnaire_type: questionnaireType,
-        }),
-      });
-  
-      if (!res.ok) {
-        throw new Error("Server response was not ok");
-      }
-
-      const data = await res.json();
-      console.log("LLM Result:", data);
-  
-      // Save result to localStorage
-      localStorage.setItem("llmResult", JSON.stringify(data));
-      
-      // Call the onSubmit prop if provided
-      if (onSubmit) {
-        await onSubmit(responses);
-      }
-
-      // Ensure navigation happens after all async operations
-      setTimeout(() => {
-        navigate("/Home", { 
-          state: { 
-            tab: "Self Assessment",
-            assessmentCompleted: true 
-          } 
-        });
-      }, 0);
-  
-    } catch (error) {
-      console.error("Error submitting assessment:", error);
-      alert("There was an issue processing your responses. Please try again.");
-    }
+   
   };
 
   const totalQuestions = questions.length;

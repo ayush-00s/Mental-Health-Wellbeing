@@ -1,0 +1,35 @@
+[
+    {
+      "id": 1,
+      "title": "Understanding Mental Wellness",
+      "content": "A deep dive into mental health awareness and well-being.",
+      "author": "Dr. Ananya Sharma",
+      "date": "March 30, 2025",
+      "image": "/assets/mental.jpg"
+    },
+    {
+      "id": 2,
+      "title": "5 Exercises for a Healthy Mind",
+      "content": "Regular physical activity improves mental health. Here are 5 simple exercises...",
+      "author": "Rahul Verma",
+      "date": "March 28, 2025",
+      "image": "/assets/blog2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "The Importance of Diet in Mental Health",
+      "content": "Your diet impacts your mood and mental clarity. Learn what to eat...",
+      "author": "Neha Kapoor",
+      "date": "March 25, 2025",
+      "image": "/assets/blog3.jpg"
+    },
+    {
+      "id": 4,
+      "title": "The Importance of you in your life",
+      "content": "Try not to give Fuck about ....",
+      "author": "Ayush Tiwari",
+      "date": "March 25, 2025",
+      "image": "/assets/blog3.jpg"
+    }
+  ]
+  

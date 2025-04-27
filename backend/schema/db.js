@@ -22,8 +22,24 @@ const blogsSchema = mongoose.Schema({
     image: String
 });
 
+const mentalHealthReportSchema = new mongoose.Schema({
+    user: {
+      type: String, 
+       
+      required: true,
+    },
+    user_responses: String,
+    analysis_result: String,
+    created_at: {
+      type: Date,
+      default: Date.now,
+    }
+  });
+  
+
 
 const UserModel = mongoose.model("User", userSchema);
 const BlogModel = mongoose.model("Blogs", blogsSchema);
+const MentalHealthReport = mongoose.model("MentalHealthReport", mentalHealthReportSchema);
 
-export { UserModel, BlogModel };
+export { UserModel, BlogModel, MentalHealthReport };

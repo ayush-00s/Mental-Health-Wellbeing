@@ -35,10 +35,12 @@ const SignIn = () => {
       
       // Save user in localStorage AND update the auth context
       localStorage.setItem('user', JSON.stringify(res.data.user));
+      
       setAuthUser(res.data.user);
       
       alert("Signed in successfully");
       navigate("/Home"); 
+
     } catch (err) {
       console.log(err);
       if (err.response?.status === 400) {

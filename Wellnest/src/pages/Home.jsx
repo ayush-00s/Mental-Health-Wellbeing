@@ -4,7 +4,7 @@ import Blogs from "../components/Blogs";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
   
-import SelfAssesment from "../components/SelfAssesment";
+import MentalHealthForm from "../components/MentalHealthform";
 import Create from "../components/Create";
 
 const Home = () => {
@@ -22,7 +22,7 @@ const Home = () => {
         {selectedTab === "Home" && <Blogs />}
 
         {/* Self Assessment Tab */}
-        {selectedTab === "Self Assessment" && <SelfAssesment />}
+        {selectedTab === "Self Assessment" && <MentalHealthForm />}
 
         {/* Create Tab */}
         {selectedTab === "Create" && <Create/>}

@@ -5,6 +5,7 @@ import cors from "cors";
 
 import blogRoute from "./route/blog.route.js";
 import userRoute from "./route/user.route.js";
+import mentalHealthRoute from "./route/mentalhealth.route.js";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ try {
 // defining routes
 app.use("/Blog", blogRoute);
 app.use("/User", userRoute);
+app.use("/MentalHealth", mentalHealthRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

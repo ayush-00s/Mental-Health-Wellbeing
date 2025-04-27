@@ -34,10 +34,10 @@ const TabsNavigation = ({ onSelect }) => {
     };
   }, [menuRef]);
   
-  // Logout handler function
+  // Updated Logout handler function with the correct port
   const handleLogout = async () => {
     try {
-      // Optional: Call your backend logout endpoint if you have one
+      // Update the port to 4000 to match your server configuration
       await axios.post('http://localhost:4001/User/Logout', {}, {
         headers: {
           Authorization: `Bearer ${authUser?.token}` // If you're using JWT
@@ -56,11 +56,14 @@ const TabsNavigation = ({ onSelect }) => {
       // Redirect to login page
       navigate('/SignIn');
       
+      console.log('Logout successful');
+      
     } catch (error) {
       console.error('Logout failed:', error);
       // Even if the API call fails, still log out on the client side
       setAuthUser(undefined);
       localStorage.removeItem("user");
+      setProfileMenuOpen(false);
       navigate('/SignIn');
     }
   };

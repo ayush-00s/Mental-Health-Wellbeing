@@ -21,7 +21,7 @@ export default function MentalHealthform({ onSubmit }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     
-   
+   a
   };
 
   const totalQuestions = questions.length;

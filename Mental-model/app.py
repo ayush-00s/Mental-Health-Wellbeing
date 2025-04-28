@@ -65,12 +65,36 @@ prompt = ChatPromptTemplate.from_template("""
     - Anxiety questions (GAD-7): Each answer is scored 0-3. Total score ranges: 0-4 minimal, 5-9 mild, 10-14 moderate, 15-21 severe anxiety.
     - Stress questions (PSS-10): Items about feeling in control are reverse scored. Score ranges: 0-13 low, 14-26 moderate, 27-40 high perceived stress.
 
-    Provide:
-    1. An assessment of which condition(s) appear most prominent
-    2. Approximate scores for each condition based on the relevant questions answered
-    3. A gentle, supportive explanation of what these symptoms might indicate
-    4. 3-5 evidence-based suggestions tailored specifically to the user's most prominent condition(s)
-    5. A clear disclaimer that this is not a clinical diagnosis and professional help is recommended
+    FORMAT YOUR RESPONSE WITH THE FOLLOWING STRUCTURE:
+    
+    ASSESSMENT SUMMARY:
+    [Brief overview of the assessment results and primary concerns]
+    
+    CONDITION SCORES:
+    - Depression: [Score]/[Max Score] - [Severity Level]
+    - Anxiety: [Score]/[Max Score] - [Severity Level]
+    - Stress: [Score]/[Max Score] - [Severity Level]
+    
+    DETAILED ANALYSIS:
+    
+    Depression:
+    [Detailed analysis of depression symptoms and their impact]
+    
+    Anxiety:
+    [Detailed analysis of anxiety symptoms and their impact]
+    
+    Stress:
+    [Detailed analysis of stress symptoms and their impact]
+    
+    RECOMMENDATIONS:
+    1. [First recommendation specific to the conditions identified]
+    2. [Second recommendation]
+    3. [Third recommendation]
+    4. [Fourth recommendation]
+    5. [Fifth recommendation if applicable]
+    
+    DISCLAIMER:
+    [Include a clear disclaimer that this is not a clinical diagnosis and professional help is recommended]
 
     Context information about mental health approaches from the database:
     {context}

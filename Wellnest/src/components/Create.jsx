@@ -1,21 +1,79 @@
 import { useState } from 'react';
 import { Save, Image, Bold, Italic, List, Link, FileText, AlignLeft, AlignCenter, AlignRight } from 'lucide-react';
+import axios from 'axios'; 
+import { useAuth } from '../context/AuthProvider';
 
 export default function Create() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
+  const [image, setImage] = useState(null);
   const [saved, setSaved] = useState(false);
   const [preview, setPreview] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const { authUser } = useAuth();
 
-  const handleSave = () => {
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+  const handleSave = async () => {
+    // Basic validation
+    if (!title.trim()) {
+      setError('Title is required');
+      return;
+    }
+    if (!content.trim()) {
+      setError('Content is required');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError('');
+      
+      // Create blog post data
+      const blogData = {
+        title,
+        content,
+        category,
+        image,
+        author: authUser ? authUser.name : "Anonymous"
+      };
+
+      // Send POST request to your API
+      const response = await axios.post('http://localhost:4001/Blog/create', blogData);
+      
+      if (response.data.success) {
+        setSaved(true);
+        setTimeout(() => setSaved(false), 2000);
+      } else {
+        setError(response.data.message || 'Failed to save blog');
+      }
+    } catch (err) {
+      console.error('Error saving blog:', err);
+      setError(err.response?.data?.message || 'An error occurred while saving the blog');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const formatText = (format) => {
-    // In a real implementation, this would insert markdown or HTML formatting
+   
     console.log(`Formatting with ${format}`);
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveImage = () => {
+    setImage(null); 
   };
 
   return (
@@ -32,13 +90,20 @@ export default function Create() {
           </button>
           <button 
             onClick={handleSave} 
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center gap-2"
+            disabled={loading}
+            className={`px-4 py-2 ${loading ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white rounded flex items-center gap-2`}
           >
             <Save size={16} />
-            {saved ? 'Saved!' : 'Save'}
+            {loading ? 'Saving...' : saved ? 'Saved!' : 'Save'}
           </button>
         </div>
       </header>
+
+      {error && (
+        <div className="bg-red-50 text-red-700 p-3 mb-4 rounded border border-red-200">
+          {error}
+        </div>
+      )}
 
       <div className="flex flex-grow gap-4">
         {/* Sidebar */}
@@ -62,10 +127,35 @@ export default function Create() {
           
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1">Featured Image</label>
-            <button className="w-full p-2 border rounded flex items-center justify-center gap-2 hover:bg-gray-100">
+            <input 
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+            />
+            <label 
+              htmlFor="image-upload"
+              className="w-full p-2 border rounded flex items-center justify-center gap-2 hover:bg-gray-100 cursor-pointer"
+            >
               <Image size={16} />
-              Upload Image
-            </button>
+              {image ? 'Change Image' : 'Upload Image'}
+            </label>
+            {image && (
+              <div className="mt-2">
+                <img 
+                  src={image} 
+                  alt="Featured" 
+                  className="w-full h-32 object-cover rounded"
+                />
+                 <button 
+                    onClick={handleRemoveImage} 
+                    className="mt-1 text-red-500 text-sm hover:text-red-700"
+                    >
+                    Remove image
+                 </button>
+              </div>
+            )}
           </div>
           
           <div className="mb-4">

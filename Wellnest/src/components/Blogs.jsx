@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Blogs = () => {
-  // State for articles
+  
   const [articles, setArticles] = useState([]);
   
   // State for modal
@@ -26,7 +26,7 @@ const Blogs = () => {
   const handleReadMore = (article) => {
     setSelectedArticle(article);
     setShowModal(true);
-    // Add background scrolling prevention
+   
     document.body.style.overflow = 'hidden';
   };
   

@@ -8,6 +8,7 @@
 - Backend:
   - [Express.js](https://expressjs.com/) (Node.js server)
   - [Python](https://www.python.org/) + [Flask](https://flask.palletsprojects.com/) (for the mental health model)
+  - mongoDb (for database)
 
 ## 🚀 Getting Started
 
